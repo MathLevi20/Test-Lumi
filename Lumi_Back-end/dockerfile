@@ -1,0 +1,21 @@
+# Dockerfile
+# Usando a imagem oficial do Node.js versão 20
+FROM node:20
+
+# Definindo o diretório de trabalho dentro do contêiner
+WORKDIR /usr/src/app
+
+# Copiando os arquivos package.json e package-lock.json (ou yarn.lock) para instalar dependências
+COPY package*.json ./
+
+# Instalando as dependências
+RUN npm install
+
+# Copiando o restante dos arquivos da aplicação para o diretório de trabalho
+COPY . .
+
+# Expondo a porta 3005
+EXPOSE 3005
+
+# Comando para iniciar o servidor
+CMD ["npm", "start"]
